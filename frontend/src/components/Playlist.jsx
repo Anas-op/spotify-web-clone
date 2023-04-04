@@ -5,7 +5,7 @@ import { getPlaylist, getAudioFeaturesForTracks } from '../spotify';
 import { catchErrors } from '../utils';
 
 import Loader from './Loader';
-import TrackItem from './TrackItem';
+import TrackItem from './RecentTrackItem';
 import FeatureChart from './FeatureChart';
 
 import styled from 'styled-components';

@@ -3,8 +3,9 @@ import { getTopTracksShort, getTopTracksMedium, getTopTracksLong } from '../spot
 import { catchErrors } from '../utils';
 
 import Loader from './Loader';
-import TrackItem from './TrackItem';
+import TrackItem from './TopTrackItem';
 
+import { Container, Col, Row } from 'react-bootstrap';
 import styled from 'styled-components';
 import { theme, mixins, media, Main } from '../styles';
 const { colors, fontSizes } = theme;
@@ -42,7 +43,7 @@ const RangeButton = styled.button`
     white-space: nowrap;
   }
 `;
-const TracksContainer = styled.ul`
+const TracksContainer = styled.div`
   margin-top: 50px;
 `;
 
@@ -89,11 +90,14 @@ const TopTracks = () => {
         </Ranges>
       </Header>
       <TracksContainer>
+      <Row>
         {topTracks ? (
-          topTracks.items.map((track, i) => <TrackItem track={track} key={i} />)
+          topTracks.items.map((track, i) => <Col xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center"><TrackItem track={track} key={i} /> </Col>)
+        
         ) : (
           <Loader />
         )}
+        </Row>
       </TracksContainer>
     </Main>
   );

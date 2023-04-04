@@ -4,17 +4,17 @@ import media from './media';
 const Main = styled.main`
   width: 100%;
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 100%;
   min-height: 100vh;
-  padding: 80px;
+  padding:30px 100px 100px 100px;
   ${media.desktop`
-    padding: 60px 50px;
+    padding: 30px 50px;
   `};
   ${media.tablet`
-    padding: 50px 40px;
+    padding: 20px 30px;
   `};
   ${media.phablet`
-    padding: 30px 25px;
+    padding: 15px 20px;
   `};
   h2 {
     ${media.tablet`

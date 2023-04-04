@@ -3,13 +3,13 @@ import { getRecentlyPlayed } from '../spotify';
 import { catchErrors } from '../utils';
 
 import Loader from './Loader';
-import TrackItem from './TrackItem';
+import RecentTrackItem from './RecentTrackItem';
 
 import styled from 'styled-components';
 import { Main } from '../styles';
 
 const TracksContainer = styled.ul`
-  margin-top: 50px;
+  margin-top: 15px;
 `;
 
 const RecentlyPlayed = () => {
@@ -24,16 +24,15 @@ const RecentlyPlayed = () => {
   }, []);
 
   return (
-    <Main>
-      <h2>Recently Played Tracks</h2>
+
       <TracksContainer>
         {recentlyPlayed ? (
-          recentlyPlayed.items.map(({ track }, i) => <TrackItem track={track} key={i} />)
+          recentlyPlayed.items.map(({ track }, i) => <RecentTrackItem track={track} key={i} />)
         ) : (
           <Loader />
         )}
       </TracksContainer>
-    </Main>
+    
   );
 };
 

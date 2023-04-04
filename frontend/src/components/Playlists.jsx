@@ -4,7 +4,7 @@ import { getPlaylists } from '../spotify';
 import { catchErrors } from '../utils';
 
 import Loader from './Loader';
-
+import {Col, Container, Row} from "react-bootstrap"
 import IconMusic from './icons/IconMusic';
 
 
@@ -18,16 +18,8 @@ const Wrapper = styled.div`
 `;
 const PlaylistsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: ${spacing.md};
   width: 100%;
   margin-top: 50px;
-  ${media.tablet`
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  `};
-  ${media.phablet`
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  `};
 `;
 const Playlist = styled.div`
   display: flex;
@@ -115,8 +107,10 @@ const Playlists = () => {
       <h2>Your Playlists</h2>
       <Wrapper>
         <PlaylistsContainer>
+          <Row>
           {playlists ? (
             playlists.items.map(({ id, images, name, tracks }, i) => (
+              <Col key={i} xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center" >
               <Playlist key={i}>
                 <PlaylistCover to={id}>
                   {images.length ? (
@@ -137,10 +131,12 @@ const Playlists = () => {
                   <TotalTracks>{tracks.total} Tracks</TotalTracks>
                 </div>
               </Playlist>
+              </Col>
             ))
           ) : (
             <Loader />
           )}
+          </Row>
         </PlaylistsContainer>
       </Wrapper>
     </Main>

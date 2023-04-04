@@ -6,6 +6,7 @@ import Nav from './Nav';
 import User from './User'
 import RecentlyPlayed from './RecentlyPlayed';
 import TopArtists from './TopArtists';
+import Genres from './Genres';
 
 import styled from 'styled-components'
 import {theme, media} from '../styles'
@@ -32,7 +33,7 @@ const SiteWrapper = styled.div`
 
 
 
-const Profile = () => {
+const MainRoute = () => {
   
     return (
         <SiteWrapper>
@@ -41,19 +42,18 @@ const Profile = () => {
            {/* <Route path="" element={<ScrollToTop/>} > */}
             <Route  path="/" element={<User/>} /> 
             <Route  path="/recent" element={<RecentlyPlayed />} />
-            <Route  path="/artists" element={<TopArtists />} />
+            <Route  path="/genres" element={<Genres />} />
+            <Route  path="/artists/:genreId" element={<TopArtists />} />
             <Route  path="/tracks" element={<TopTracks />} />
             <Route  path="/playlists" element={<Playlists />} />
             <Route  path="/playlists/:playlistId" element={<Playlist />} />
             <Route  path="/recommendations/:playlistId" element={<Recommendations />}/>
             <Route  path="/track/:trackId" element={<Track />} />
-            <Route  path="/artists/:artistId" element={<Artist/>}/>
+            <Route  path="/artist/:artistId" element={<Artist/>}/>
            {/* </Route>  */}
           </Routes>
-              
         </SiteWrapper>
     );
-
 }
 
-export default Profile;
+export default MainRoute;

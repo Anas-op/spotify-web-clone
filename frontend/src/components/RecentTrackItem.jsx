@@ -9,9 +9,9 @@ import styled from 'styled-components';
 import { theme, mixins, media } from '../styles';
 const { colors, fontSizes, spacing } = theme;
 
+
 const TrackLeft = styled.span`
   ${mixins.overflowEllipsis};
-  z-index:0;
 `;
 const TrackRight = styled.span``;
 const TrackArtwork = styled.div`
@@ -60,6 +60,9 @@ const TrackMeta = styled.div`
 `;
 const TrackName = styled.span`
   margin-bottom: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #979797;
   border-bottom: 1px solid transparent;
   &:hover,
   &:focus {
@@ -68,17 +71,16 @@ const TrackName = styled.span`
 `;
 const TrackAlbum = styled.div`
   ${mixins.overflowEllipsis};
-  color: ${colors.lightGrey};
+  color: #4F4F4F;
   font-size: ${fontSizes.sm};
   margin-top: 3px;
 `;
 const TrackDuration = styled.span`
-  color: ${colors.lightGrey};
+  color: #979797;
   font-size: ${fontSizes.sm};
 `;
 
-const TrackItem = ({ track }) => (
-  
+const RecentTrackItem = ({ track }) => (
   <li>
     <TrackContainer to={`/track/${track.id}`}>
       <div>
@@ -114,8 +116,8 @@ const TrackItem = ({ track }) => (
   </li>
 );
 
-TrackItem.propTypes = {
+RecentTrackItem.propTypes = {
   track: PropTypes.object.isRequired,
 };
 
-export default TrackItem;
+export default RecentTrackItem;

@@ -11,8 +11,8 @@ import {
   doesUserFollowPlaylist,
 } from '../spotify';
 import { catchErrors } from '../utils';
-
-import TrackItem from './TrackItem';
+import { Col, Container, Row } from 'react-bootstrap';
+import TrackItem from './TopTrackItem';
 
 import styled from 'styled-components';
 import { theme, mixins, media, Main } from '../styles';
@@ -70,7 +70,7 @@ const Recommendations = props => {
   useMemo(() => {
     const fetchData = async () => {
       if (playlist) {
-        const { data } = await getRecommendationsForTracks(playlist.tracks.items);
+        const { data } = await getRecommendationsForTracks(playlist.tracks.items, null);
         setRecommmendations(data);
       }
     };
@@ -114,6 +114,7 @@ const Recommendations = props => {
   return (
     <Main>
       {playlist && (
+    
         <PlaylistHeading>
           <h2>
             Recommended Tracks Based On{' '}
@@ -132,8 +133,10 @@ const Recommendations = props => {
         </PlaylistHeading>
       )}
       <TracksContainer>
+      <Row>
         {recommendations &&
-          recommendations.tracks.map((track, i) => <TrackItem track={track} key={i} />)}
+          recommendations.tracks.map((track, i) =><Col  xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center"> <TrackItem track={track} key={i} /></Col>)}
+      </Row>
       </TracksContainer>
     </Main>
   );

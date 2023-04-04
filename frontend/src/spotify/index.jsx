@@ -40,7 +40,8 @@ export const getAccessToken = () => {
   // If token has expired
   if (Date.now() - getTokenTimestamp() > EXPIRATION_TIME) {
     console.warn('Access token has expired, refreshing...');
-    refreshAccessToken();
+    //refreshAccessToken();
+    window.localStorage.clear();
   }
 
   const localAccessToken = getLocalAccessToken();
@@ -124,6 +125,15 @@ export const getTopTracksMedium = () =>
   });
 export const getTopTracksLong = () =>
   axios.get('https://api.spotify.com/v1/me/top/tracks?limit=50&time_range=long_term', { headers });
+
+/**
+ * Get available Genre
+ * https://developer.spotify.com/documentation/web-api/reference/get-recommendation-genres/
+ */
+export const getGenres = () => 
+ axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', { headers })
+
+
 
 /**
  * Get an Artist
@@ -219,10 +229,11 @@ export const getAudioFeaturesForTracks = tracks => {
  * Get Recommendations Based on Seeds
  * https://developer.spotify.com/documentation/web-api/reference/browse/get-recommendations/
  */
-export const getRecommendationsForTracks = tracks => {
-  const shuffledTracks = tracks.sort(() => 0.5 - Math.random());
-  const seed_tracks = getTrackIds(shuffledTracks.slice(0, 5));
-  const seed_artists = '';
+
+export const getRecommendationsForTracks = (tracks, artistId) => {
+  const shuffledTracks = tracks ? tracks.sort(() => 0.5 - Math.random()) : null;
+  const seed_tracks = tracks ? getTrackIds(shuffledTracks.slice(0, 5)) : '';
+  const seed_artists = artistId ? artistId : '';
   const seed_genres = '';
 
   return axios.get(

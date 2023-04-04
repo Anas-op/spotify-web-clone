@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getTopArtistsShort, getTopArtistsMedium, getTopArtistsLong } from '../spotify';
 import { catchErrors } from '../utils';
 
+import { Container, Col, Row } from 'react-bootstrap';
 import IconInfo from './icons/IconInfo';
 import Loader from './Loader';
 
@@ -44,16 +45,7 @@ const RangeButton = styled.button`
   }
 `;
 const ArtistsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 20px;
   margin-top: 50px;
-  ${media.tablet`
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  `};
-  ${media.phablet`
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  `};
 `;
 const Artist = styled.div`
   display: flex;
@@ -126,6 +118,8 @@ const ArtistName = styled.a`
 const TopArtists = () => {
   const [topArtists, setTopArtists] = useState(null);
   const [activeRange, setActiveRange] = useState('long');
+  const {genreId} = useParams();
+
 
   const apiCalls = {
     long: getTopArtistsLong(),
@@ -136,18 +130,20 @@ const TopArtists = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await getTopArtistsLong();
-      setTopArtists(data);
-      console.log(data)
+  
+       const filteredData = data.items.filter(artist => artist.genres.find(genre => genre.includes(genreId)));
+      setTopArtists(filteredData);
     };
     catchErrors(fetchData());
   }, []);
 
   const changeRange = async range => {
     const { data } = await apiCalls[range];
-    setTopArtists(data);
+    const filteredData = data.items.filter(artist => artist.genres.find(genre => genre.includes(genreId)));
+    setTopArtists(filteredData);
     setActiveRange(range);
-  };
 
+  };
   const setRangeData = range => catchErrors(changeRange(range));
 
   return (
@@ -167,8 +163,10 @@ const TopArtists = () => {
         </Ranges>
       </Header>
       <ArtistsContainer>
+        <Row>
         {topArtists ? (
-          topArtists.items.map(({ id, external_urls, images, name }, i) => (
+          topArtists.map(({ id, external_urls, images, name }, i) => (
+            <Col  xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center">
             <Artist key={i}>
               <ArtistArtwork to={`/artist/${id}`}>
                 {images.length && <img src={images[1].url} alt="Artist" />}
@@ -180,13 +178,20 @@ const TopArtists = () => {
                 {name}
               </ArtistName>
             </Artist>
+            </Col>
           ))
         ) : (
           <Loader />
         )}
+        </Row>
       </ArtistsContainer>
     </Main>
   );
 };
 
 export default TopArtists;
+
+
+
+
+

@@ -62,6 +62,12 @@ const GlobalStyle = createGlobalStyle`
     max-width: 100%;
   }
 
+
+  div::-webkit-scrollbar {
+    width: 0px;
+  }
+
+
   body {
     min-height: 100%;
     overflow-x: hidden;
