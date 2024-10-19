@@ -158,17 +158,16 @@ const Preview = styled.section`
   // grid-template-columns: 1fr 1fr;
   // grid-gap: 70px;
   width: 100%;
-  margin-top: 40px;
+  margin-top: 50px;
   ${media.tablet`
     display: block;
-    margin-top: 30px;
+    margin-top: 50px;
   `};
 `;
 const Tracklist = styled.div`
   ${media.tablet`
     &:last-of-type {
       margin-top: 30px;
-      
     }
   `};
 `;
@@ -179,8 +178,14 @@ const TracklistHeading = styled.div`
   h2 {
     display: inline-block;
     margin: 0;
-    font-size: 17px;
+    font-size: 25px;
   }
+   ${media.tablet`
+   h2 {
+    font-size: 16px;
+   }
+   `
+    }
 `;
 
 const RecentTracklist = styled.div`
@@ -198,15 +203,25 @@ const RecentTracklistHeading = styled.div`
   h2 {
     display: inline-block;
     margin: 0;
-    font-size: 17px;
+    font-size: 20px;
   }
+  ${media.tablet`
+  h2 {
+    font-size: 14px;
+  }
+`};
+
 `;
 
 const MoreButton = styled(Link)`
   text-align: center;
   white-space: nowrap;
   color: #979797;
+  font-size:14px;
   font-weight: 300;
+  &:hover{
+     color: ${colors.white};
+    }
   ${media.phablet`
     font-size: 12px;
   `};
@@ -236,7 +251,7 @@ const Artist = styled.div`
   width: fit-content !important;
   justify-content: center;
   ${media.tablet`
-    margin-bottom: ${spacing.md};
+    margin-bottom: ${spacing.base};
   `};
 `;
 const ArtistArtwork = styled(Link)`
@@ -263,13 +278,10 @@ const ArtistName = styled(Link)`
   flex-grow: 1;
   font-size: 14px;
   font-weight 400;
-  margin-top: 4px;
+  margin-top: 10px;
   color: ${colors.lightGrey};
-  span {
-    border-bottom: 1px solid transparent;
-    &:hover,
-    &:focus {
-      border-bottom: 1px solid ${colors.white};
+   &:hover{
+      color: ${colors.white};
     }
   }
 `;
@@ -383,7 +395,7 @@ const User = () => {
                     display: "flex",
                     overflowX: "scroll",
                     width: "100%",
-                    padding: "30px 0",
+                    padding: "20px 0",
                   }}
                   {...bindArtists()}
                 >
@@ -395,7 +407,7 @@ const User = () => {
                         width: "auto",
                         height: "auto",
                         borderRadius: "10px",
-                        marginLeft: "30px",
+                        marginRight: "30px",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center center",
@@ -430,7 +442,7 @@ const User = () => {
                   display: "flex",
                   overflowX: "scroll",
                   width: "100%",
-                  padding: "50px 0",
+                  padding: "20px 0",
                 }}
                 {...bindTracks()}
               >
@@ -444,9 +456,8 @@ const User = () => {
                         flexShrink: 0,
                         width: "auto",
                         height: "auto",
-        
                         borderRadius: "10px",
-                        marginLeft: "30px",
+                        marginRight: "30px",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center center",

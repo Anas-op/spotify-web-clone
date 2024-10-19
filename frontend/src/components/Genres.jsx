@@ -154,7 +154,7 @@ const Genres = () => {
     setTopArtists(data);
     setActiveRange(range);
   };
-  const setRangeData = (range) => catchErrors(changeRange(range));
+  
   return (
     <Main>
       <Header>
@@ -162,7 +162,6 @@ const Genres = () => {
       </Header>
       <GenresContainer>
         <Row >
-        
         {genres ? (
           genres.genres.map((genre, i) => (
             <Col xs={6} key={i} className="p-3">

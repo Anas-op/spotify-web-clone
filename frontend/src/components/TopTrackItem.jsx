@@ -11,7 +11,7 @@ const { colors, fontSizes, spacing } = theme;
 
 const TrackArtwork = styled.div`
   display: flex;
-  width:100%;
+  width: 100%;
   position: relative;
   img {
     width: 100%;
@@ -41,7 +41,11 @@ const TrackContainer = styled(Link)`
   width: 250px;
   overflow: hidden;
   text-align: center;
-  border-radius: 8px;
+  border-radius: 8px !important;
+  &:hover,
+  &:focus {
+    color: ${colors.white};
+  }
   margin-bottom: ${spacing.md};
   ${media.tablet`
     margin-bottom: ${spacing.base};
@@ -66,10 +70,11 @@ const TrackName = styled.span`
   font-weight: 700;
   margin-left: 10px;
   z-index:0;
+  
 `;
 const TrackArtist = styled.div`
   color: ${colors.lightGrey};
-  font-size: 13px;
+  font-size: 12px;
   font-weight 700;
   justify-content: center;
   text-align: center;
@@ -96,12 +101,12 @@ const Blur = styled.div`
   margin-top: -10px;
   position: absolute;
   z-index: 0;
-  overflow: hidden;
+  overflow: auto;
   opacity: 0.5;
   img {
     filter: blur(20px);
     height: 100%;
-    width:100%;
+    width: 100%;
     -webkit-filter: blur(20px);
   }
 `;
@@ -112,6 +117,9 @@ const TopTrackItem = ({ track }) => (
       {track.album.images.length && (
         <img src={track.album.images[1].url} alt="Album Artwork" />
       )}
+      <Mask>
+        <IconInfo />
+      </Mask>
     </TrackArtwork>
     <TrackInfo>
       <Blur>

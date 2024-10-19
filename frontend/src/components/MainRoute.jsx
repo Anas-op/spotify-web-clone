@@ -7,6 +7,7 @@ import User from './User'
 import RecentlyPlayed from './RecentlyPlayed';
 import TopArtists from './TopArtists';
 import Genres from './Genres';
+import Profile from './Profile';
 
 import styled from 'styled-components'
 import {theme, media} from '../styles'
@@ -43,6 +44,7 @@ const MainRoute = () => {
             <Route  path="/" element={<User/>} /> 
             <Route  path="/recent" element={<RecentlyPlayed />} />
             <Route  path="/genres" element={<Genres />} />
+            <Route path="/profile" element={<Profile />} />
             <Route  path="/artists/:genreId" element={<TopArtists />} />
             <Route  path="/tracks" element={<TopTracks />} />
             <Route  path="/playlists" element={<Playlists />} />

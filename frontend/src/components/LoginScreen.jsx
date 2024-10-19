@@ -12,9 +12,12 @@ const LOGIN_URI =
 
 const Login = styled(Main)`
     ${mixins.flexCenter};
+    svg{
+        color: ${colors.green};
+    }
+    color: ${colors.green};
     flex-direction: column;
     min-height: 100vh;
-    background-image: url('/images/gradient.jpg')
     text-align:center;
     justify-content:flex-center;
     h1 {
@@ -31,8 +34,8 @@ const Login = styled(Main)`
     const LoginButton = styled.a`
     display: inline-block;
     background-color: ${colors.transparent};
-    color: ${colors.white};
-    border: 1px solid white;
+    border: 1px solid ${colors.green};;
+    color: ${colors.green};
     border-radius: 30px;
     padding: 15px 90px;
     margin: 25px 0 70px;
@@ -44,7 +47,7 @@ const Login = styled(Main)`
     text-align: center;
     &:hover,
     &:focus {
-      background-color: ${colors.white};
+      background-color: ${colors.green};
       color:${colors.darkGrey};
     }
   `;
