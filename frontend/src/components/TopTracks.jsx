@@ -92,7 +92,7 @@ const TopTracks = () => {
       <TracksContainer>
       <Row>
         {topTracks ? (
-          topTracks.items.map((track, i) => <Col xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center"><TrackItem track={track} key={i} /> </Col>)
+          topTracks.items.map((track, i) => <Col xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center" key={i}><TrackItem track={track} /> </Col>)
         
         ) : (
           <Loader />

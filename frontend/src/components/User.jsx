@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 import { catchErrors } from "../utils";
 import { Row, Col } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { animated, useSpring } from "react-spring";
 import { useScroll } from "react-use-gesture";
 
@@ -401,6 +400,7 @@ const User = () => {
                 >
                   {topArtists.items.slice(0, 10).map((artist, i) => (
                     <animated.div
+                      key={i}
                       style={{
                         ...styleArtists,
                         flexShrink: 0,
@@ -413,7 +413,7 @@ const User = () => {
                         backgroundPosition: "center center",
                       }}
                     >
-                      <Artist key={i}>
+                      <Artist>
                         <ArtistArtwork>
                           {artist.images.length && (
                             <img src={artist.images[0].url} alt="Artist" />
@@ -451,6 +451,7 @@ const User = () => {
                 {topTracks ? (
                   topTracks.items.slice(0, 10).map((track, i) => (
                     <animated.div
+                      key={i}
                       style={{
                         ...styleTracks,
                         flexShrink: 0,
@@ -463,7 +464,7 @@ const User = () => {
                         backgroundPosition: "center center",
                       }}
                     >
-                      <TopTrackItem track={track} key={i} />
+                      <TopTrackItem track={track} />
                     </animated.div>
                   ))
                 ) : (

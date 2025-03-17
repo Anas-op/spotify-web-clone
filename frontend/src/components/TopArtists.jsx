@@ -166,8 +166,9 @@ const TopArtists = () => {
         <Row>
         {topArtists ? (
           topArtists.map(({ id, external_urls, images, name }, i) => (
-            <Col  xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center">
-            <Artist key={i}>
+            <Col key={i} xs={6} sm={4} md={4} lg={3} xl={3} className="d-flex justify-content-center">
+            
+            <Artist >
               <ArtistArtwork to={`/artist/${id}`}>
                 {images.length && <img src={images[1].url} alt="Artist" />}
                 <Mask>

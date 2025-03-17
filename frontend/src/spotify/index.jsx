@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getHashParams } from '../utils';
+import genresData from './genre-seeds'; // added static genres since the spotify api is currently deprecated
 
 // TOKENS ******************************************************************************************
 const EXPIRATION_TIME = 3600 * 1000; // 3600 seconds * 1000 = 1 hour in milliseconds
@@ -128,12 +129,12 @@ export const getTopTracksLong = () =>
 
 /**
  * Get available Genre
- * https://developer.spotify.com/documentation/web-api/reference/get-recommendation-genres/
+ * https://developer.spotify.com/documentation/web-api/reference/get-recommendation-genres/   DEPRECATED
  */
-export const getGenres = () => 
- axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', { headers })
+export const getGenres = () => genresData;
 
-
+// DEPRECATED API
+// axios.get('https://api.spotify.com/v1/recommendations/available-genre-seeds', { headers })
 
 /**
  * Get an Artist
@@ -196,7 +197,7 @@ export const followPlaylist = playlistId => {
   const url = `https://api.spotify.com/v1/playlists/${playlistId}/followers`;
   return axios({ method: 'put', url, headers });
 };
-
+ 
 /**
  * Get a Playlist
  * https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/

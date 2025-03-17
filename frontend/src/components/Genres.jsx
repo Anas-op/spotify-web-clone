@@ -1,31 +1,26 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import {
-  getTopArtistsShort,
-  getTopArtistsMedium,
-  getTopArtistsLong,
   getGenres,
 } from "../spotify";
 import { catchErrors } from "../utils";
 
 
-import IconInfo from "./icons/IconInfo";
 import Loader from "./Loader";
 
 import styled from "styled-components";
 import { theme, mixins, media, Main } from "../styles";
-import {Row, Container, Col} from "react-bootstrap"
+import {Row, Col} from "react-bootstrap"
 const { colors, fontSizes, spacing } = theme;
 
 const Header = styled.header`
   ${mixins.flexBetween};
-  ${media.tablet`
-    display: block;
-  `};
+ 
   h2 {
     margin: 0;
   }
 `;
+
 const Ranges = styled.div`
   display: flex;
   margin-right: -11px;
@@ -94,6 +89,9 @@ const GenreArtwork = styled(Link)`
   justify-content:flex-start;
   text-align: left;
   width:100%;
+  &:hover{
+    color: ${colors.grey};
+  }
   height: 180px;
   ${media.tablet`
     height: 120px;
@@ -125,49 +123,72 @@ const GenreArtwork = styled(Link)`
 const GenreName = styled.h1`
   margin: ${spacing.base} 20px;
   font-weight: 700;
-  font-size: 14px;
-  text-transform: capitalize;
-  border-bottom: 1px solid transparent;
+  font-size: 15px;
   &:hover,
   &:focus {
-    border-bottom: 1px solid ${colors.white};
+    color: ${colors.white};
   }
+  text-transform: capitalize;
+  border-bottom: 1px solid transparent;
+`
+
+const SearchBar = styled.input`
+width: auto;
+height: 40px;
+padding: 10px;
+background: ${colors.white};
+border-radius: 10px;
+background-color: #212529;
+border: none;
+color: ${colors.white};
+
+
 `
 
 const Genres = () => {
-  const [genres, setGenres] = useState(null);
+  const [genres, setGenres] = useState([]);
+  const [search, setSearch] = useState("");
+
   let colors = [
     '#545DB2','#678026','#54B263','#268060', '#B27B54','#1F1F22' ,'#EF2F62', '#678026', '#B25459', '#B25459'
   ]
 
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getGenres();
-      setGenres(data);
+      const {genres} = getGenres();
 
-    };
-    catchErrors(fetchData());
+    const obj = genres.map(genre => ({
+        name: genre,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      }))
+    
+     setGenres(obj);
+      
   }, []);
 
-  const changeRange = async (range) => {
-    const { data } = await apiCalls[range];
-    setTopArtists(data);
-    setActiveRange(range);
-  };
+
+
+  const filteredGenres = useMemo(() => {
+      return genres.filter((item) => 
+      item.name.toLowerCase().includes(search.toLowerCase()))
+
+}, [genres, search]);
+
+
   
   return (
     <Main>
       <Header>
         <h2>Genres</h2>
+        <SearchBar onChange={(e) => setSearch(e.target.value)} placeholder="Search Genre.." />
       </Header>
       <GenresContainer>
         <Row >
-        {genres ? (
-          genres.genres.map((genre, i) => (
-            <Col xs={6} key={i} className="p-3">
-            <Genre key={i}>
-              <GenreArtwork style={{background: `${colors[Math.floor(Math.random()*colors.length)]}`}} to={`/artists/${genre}`}>
-              <GenreName>{genre}</GenreName>
+        {filteredGenres ? (
+          filteredGenres.map((genres, id) => (
+            <Col xs={6} key={id} className="p-3">
+            <Genre key={id}>
+              <GenreArtwork style={{background: genres.color}} to={`/artists/${genres.name}`}>
+              <GenreName>{genres.name}</GenreName>
               </GenreArtwork>            
             </Genre>
             </Col>
