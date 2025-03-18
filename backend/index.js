@@ -43,10 +43,10 @@ const stateKey = 'spotify_auth_state';
   const app = express();
   
   // Priority serve any static files.
-  app.use(express.static(path.resolve(__dirname, '../client/build')));
+  app.use(express.static(path.resolve(__dirname, '../frontend/dist')));
 
   app
-    .use(express.static(path.resolve(__dirname, '../client/build')))
+    .use(express.static(path.resolve(__dirname, '../frontend/dist')))
     .use(cors())
     .use(cookieParser())
     .use(
@@ -59,10 +59,10 @@ const stateKey = 'spotify_auth_state';
         ],
       }),
     )
-    .use(express.static(path.resolve(__dirname, '../client/build')));
+    .use(express.static(path.resolve(__dirname, '../frontend/dist')));
 
   app.get('/', function (req, res) {
-    res.render(path.resolve(__dirname, '../client/build/index.html'));
+    res.render(path.resolve(__dirname, '../frontend/dist/index.html'));
   });
 
   app.get('/login', function (req, res) {
@@ -157,7 +157,7 @@ const stateKey = 'spotify_auth_state';
 
   // All remaining requests return the React app, so it can handle routing.
   app.get('*', function (request, response) {
-    response.sendFile(path.resolve(__dirname, '../client/public', 'index.html'));
+    response.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'));
   });
 
   app.listen(PORT, function () {
