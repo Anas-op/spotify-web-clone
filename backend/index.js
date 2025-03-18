@@ -164,3 +164,4 @@ const stateKey = 'spotify_auth_state';
     console.warn(`Node cluster worker ${process.pid}: listening on port ${PORT}`);
   });
 
+module.exports = app;
