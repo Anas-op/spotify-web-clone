@@ -6,7 +6,7 @@ A Spotify web clone that provides users with:
 - Search for artists by genre
 - Get recommendations based on a song or artist
 - User authentication using access tokens
-- 
+
 Built using the Spotify API, with authentication via tokens.
 
 # Features
