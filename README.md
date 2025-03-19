@@ -28,3 +28,5 @@ API: Spotify Web API
 
 
 Live app: https://spotify-web-clone-one.vercel.app
+
+NOTE: some apis from Spotify got deprecated.
