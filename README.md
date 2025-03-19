@@ -20,8 +20,11 @@ Built using the Spotify API, with authentication via tokens.
 
 Frontend: Vite + React, Styled Components
 
-Backend: Express.js
+Backend: NodeJs with Express.js
 
 Authentication: Token-based authentication with the Spotify API
 
 API: Spotify Web API
+
+
+Live app: https://spotify-web-clone-one.vercel.app
